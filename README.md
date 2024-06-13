@@ -1,2 +1,2 @@
-# Project-Aero
+# Aero
 Voxel engine based on Windows API only
