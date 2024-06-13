@@ -1,0 +1,6 @@
+#ifndef AERO_BEHAVIOR_HH
+#define AERO_BEHAVIOR_HH
+
+
+
+#endif /* AERO_BEHAVIOR_HH */
