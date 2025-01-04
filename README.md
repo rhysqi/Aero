@@ -1,4 +1,4 @@
-# Aero
+# Aero - Voxel Engine for Windows
 Aero is a low-level voxel engine built using Windows API for direct system interaction. 
 Unlike a traditional game framework, it operates by directly calling system functions and bypassing higher-level libraries or runtimes. 
 This approach gives developers more control over how the system resources are managed and utilized, providing a more "bare-metal" experience in voxel-based 3D rendering.
