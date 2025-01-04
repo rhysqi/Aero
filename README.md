@@ -4,6 +4,9 @@ Voxel engine based on Windows API only.
 # System Requirements
 - OS: Windows 10/11 64-bit
 - CPU: SSE 4.2 support required
+- RAM: 4 GB DDR4
+- GPU: OpenGL 4.0
+- Storage: Using SSD is Recommended
 
 # Features
 - Accelerated Compute World Generation
