@@ -15,6 +15,7 @@ This approach gives developers more control over how the system resources are ma
 - Accelerated Compute Shader Generation
 - World Planet Gravity Object
 - Object Culling
+- Embedded Media Assets with Windows CNG Protection
 
 # Libraries, Toolchains & Programming Language
 - [x] Windows API (10.0.26100.0)
@@ -28,3 +29,5 @@ This approach gives developers more control over how the system resources are ma
 - [x] C/C++ without UCRT & STD C++
 - [x] Makefile
 
+# Notes
+If you are looking for media file such as audio files, image files, or similar like this it doesn't available in releases binary.
