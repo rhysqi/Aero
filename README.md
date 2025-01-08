@@ -22,9 +22,9 @@ This approach gives developers more control over how the system resources are ma
 - [x] OpenGL 4
 - [x] Clang/LLVM (17.0.5)
 - [ ] SPIR-V
-- [ ] KTX
+- [x] KTX
 - [x] SSE4.2
-- [ ] AVX
+- [x] AVX2
 - [x] C/C++ without UCRT & STD C++
 - [x] Makefile
 
