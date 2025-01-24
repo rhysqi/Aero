@@ -4,7 +4,6 @@
 #if defined(_WIN32) | defined(_WIN64)
 
 #include <windows.h>
-#include <minwindef.h>
 
 namespace Aero_System {
 	namespace Directory {
@@ -20,11 +19,16 @@ namespace Aero_System {
 	}
 
 	namespace Util {
-		UINT ScreenHeight();
-		UINT ScreenWidth();
+		UINT DisplayHeight();
+		UINT DisplayWidth();
+
+		UINT WindowClientHeight(HWND hWnd);
+		UINT WindowClientWidth(HWND hWnd);
 
 		UINT WindowHeight(HWND hWnd);
 		UINT WindowWidth(HWND hWnd);
+
+		VOID NanoSleep(UINT64 uNanoSeconds);
 	}
 }
 
