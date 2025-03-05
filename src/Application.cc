@@ -1,64 +1,34 @@
-#ifndef UNICODE
-#define UNICODE
-#endif /* UNICODE */
-
 #include <Windows.h>
-#include <WinUser.h>
-#include <WinBase.h>
-
+#include <synchapi.h>
 #include <winnt.h>
 
-LRESULT
-CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+#include <Pdh.h>
 
-int WINAPI
-WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow){
-	
-	wchar_t WindowTitle[] = L"Project Aero";
+#include <profileapi.h>
+#include <errhandlingapi.h>
 
-	// Register the window class.
-    const wchar_t CLASS_NAME[]  = L"Base Window Class";
+#include <wchar.h>
+
+void PerformCounter()
+{
+    LARGE_INTEGER pfc;
+    QueryPerformanceFrequency(&pfc);
+
+    LARGE_INTEGER frequency;
+    QueryPerformanceFrequency(&frequency);
+
+    int divisor = 1000000000;
     
-    WNDCLASS wc = { };
+    double Seconds = ((double)pfc.QuadPart / frequency.QuadPart) / divisor;
+    wprintf(L"Time in Seconds: %.9f seconds\n", Seconds);
 
-    wc.lpfnWndProc   = WindowProc;
-    wc.hInstance     = hInstance;
-    wc.lpszClassName = CLASS_NAME;
+    ULONGLONG NanoSeconds = (pfc.QuadPart * divisor) / frequency.QuadPart;
+    wprintf(L"Time in Nano Seconds: %llu ns\n", NanoSeconds / divisor);
+}
 
-    RegisterClass(&wc);
-
-    // Create the window.
-
-    HWND hwnd = CreateWindowEx(
-        0,                              // Optional window styles.
-        CLASS_NAME,                     // Window class
-        WindowTitle,    // Window text
-        WS_OVERLAPPEDWINDOW,            // Window style
-
-        // Size and position
-        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
-
-        NULL,       // Parent window    
-        NULL,       // Menu
-        hInstance,  // Instance handle
-        NULL        // Additional application data
-        );
-
-    if (hwnd == NULL)
-    {
-        return 0;
-    }
-
-    ShowWindow(hwnd, nCmdShow);
-
-    // Run the message loop.
-
-    MSG msg = { };
-    while (GetMessage(&msg, NULL, 0, 0) > 0)
-    {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-	
-	return 0;
+int wmain(int argc, const wchar_t *argv[]){
+    
+    PerformCounter();
+    
+    return 0;
 }
