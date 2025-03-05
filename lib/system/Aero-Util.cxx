@@ -1,4 +1,4 @@
-#if defined(_WIN32) | defined(_WIN64)
+#if defined(_WIN32) || defined(_WIN64)
 
 #ifndef UNICODE
 #define UNICODE
@@ -40,12 +40,12 @@ UINT Util::WindowWidth(HWND hWnd)
 	return 0;
 }
 
-VOID Util::NanoSleep(UINT64 uNanoSeconds)
+VOID Util::MicroSleep(UINT64 uMicroSeconds)
 {
     LARGE_INTEGER frequency;
     QueryPerformanceFrequency(&frequency);
 
-    UINT64 targetTicks = uNanoSeconds * frequency.QuadPart / 1000000000;
+    UINT64 targetTicks = uMicroSeconds * frequency.QuadPart / 1000000;
 
     LARGE_INTEGER start;
     QueryPerformanceCounter(&start);
@@ -56,4 +56,20 @@ VOID Util::NanoSleep(UINT64 uNanoSeconds)
     } while ((current.QuadPart - start.QuadPart) < targetTicks);
 }
 
-#endif /* defined(_WIN32) | defined(_WIN64) */
+VOID Util::NanoSleep(UINT64 uwNanoSeconds)
+{
+    LARGE_INTEGER frequency;
+    QueryPerformanceFrequency(&frequency);
+
+    UINT64 targetTicks = uwNanoSeconds * frequency.QuadPart / 1000000000;
+
+    LARGE_INTEGER start;
+    QueryPerformanceCounter(&start);
+    
+    LARGE_INTEGER current;
+    do {
+        QueryPerformanceCounter(&current); 
+    } while ((current.QuadPart - start.QuadPart) < targetTicks);
+}
+
+#endif /* defined(_WIN32) || defined(_WIN64) */

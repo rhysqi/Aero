@@ -1,27 +1,31 @@
-# C/C++ Standard settings
-CXX			=	clang++
-CXX_LIB		=	${CXX} -c
-CXSTD		=	-std=c++11 -stdlib=libc++ -nostdlib++
+CC		=	clang
+CXX		=	clang++
 
-CXFLAGS		=	-O3
-CXFLAGS		+=	-fstack-protector-strong -fvectorize -fslp-vectorize \
-				-fcoroutines -fstrict-enums -fsplit-lto-unit \
-				-fstrict-float-cast-overflow -fstrict-vtable-pointers \
-				-fconvergent-functions -fenable-matrix
+OPT_F	=	-fcrash-diagnostics  -fdirectives-only -fenable-matrix \
+			-fstrict-float-cast-overflow -fstrict-vtable-pointers \
+			-fstrict-enums -fsplit-lto-unit \
+			-fstack-protector-strong -fvectorize
 
-CXFLAGS		+=	-fno-fixed-point -fno-strict-aliasing -fno-exceptions \
-				-fno-spell-checking -fno-rtti -fno-rtti-data -fno-access-control \
-				-fno-addrsig -fno-autolink
+OPT_Fno	=	-fno-autolink -fno-builtin -fno-cxx-modules \
+			-fno-convergent-functions -fno-courotines \
+			-fno-experimental-library -fno-exceptions \
+			-fno-strict-aliasing
 
-CXFLAGS		+=	-mstack-arg-probe -mstackrealign -msoft-float \
-				-mlvi-cfi -mlvi-hardening
+OPT_M	=	-mavx -mavx2 -msse -msse4.2 \
+			-mlvi-cfi -mlvi-hardening \
+			-mstack-arg-probe -mstackrealign
 
-CXFLAGS		+=	-Wall -Wabi -WClass-convertion -WDeprecated -Wformat-security \
-				-Wc++11-compat -Wunused -Wuninitialized -Wextra
+OPT_Mno	=	-mno-sse2 -mno-sse3 \
+			-mno-outline-atomics
+			
+OPT_W	=	-Wall -Wabi -WClass-convertion -WDeprecated -Wformat-security \
+			-Wunused -Wuninitialized -Wextra
 
-CXFLAGS		+=	-Wno-pedantic
-CXFLAGS		+=	-v -H
+OPT_Wno	=	-Wno-pedantic
 
-# Win32
-CXARGS_W32	=	-mwindows -m64 -D_WIN32 \
-				-Wl",/DYNAMICBASE:YES" -Wl",/LARGEADDRESSNAME:YES"
+OPT_Wl	=	-Wl",/DYNAMICBASE:YES" -Wl",/ENTRY:wmain" \
+			-Wl",/LARGEADDRESSNAME:YES" -Wl",/NODEFAULTLIB"
+
+OPT_Uni	=	-v -H
+
+LIB_CXX	=	-luser32

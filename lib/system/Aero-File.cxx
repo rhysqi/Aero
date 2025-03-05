@@ -1,4 +1,4 @@
-#if defined(_WIN32) | defined(_WIN64)
+#if defined(_WIN32) || defined(_WIN64)
 
 #include "../../include/Aero-System.hh"
 
@@ -13,10 +13,13 @@
 
 using namespace Aero_System;
 
-HANDLE File::Create(LPCWSTR FileName, LPSECURITY_ATTRIBUTES AttrSec, DWORD dwFlagsAndAttribute)
+HANDLE File::Create(LPCWSTR lpFileName, LPSECURITY_ATTRIBUTES AttrSec, DWORD dwFlagsAndAttribute)
 {
 	LPSECURITY_ATTRIBUTES saFile = (LPSECURITY_ATTRIBUTES)VirtualAlloc(
-		NULL, sizeof(SECURITY_ATTRIBUTES), MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE
+		NULL,
+		sizeof(SECURITY_ATTRIBUTES),
+		MEM_COMMIT | MEM_RESERVE,
+		PAGE_READWRITE
 	);
 
 	if (saFile == NULL) {
@@ -27,8 +30,16 @@ HANDLE File::Create(LPCWSTR FileName, LPSECURITY_ATTRIBUTES AttrSec, DWORD dwFla
 	saFile->bInheritHandle = FALSE;
 	saFile->nLength = sizeof(SECURITY_ATTRIBUTES);
 
+	DWORD oldProtect;
+	VirtualProtect(
+		saFile,
+		sizeof(SECURITY_ATTRIBUTES),
+		PAGE_READONLY,
+		&oldProtect
+	);
+
 	HANDLE hFile = CreateFileW(
-		FileName,
+		lpFileName,
 		GENERIC_WRITE | GENERIC_READ,
 		0, saFile,
 		CREATE_NEW,
@@ -44,12 +55,12 @@ HANDLE File::Create(LPCWSTR FileName, LPSECURITY_ATTRIBUTES AttrSec, DWORD dwFla
 	return hFile;
 }
 
-BOOL File::Write(HANDLE hFile, LPCWSTR FileBuffer)
+BOOL File::Write(HANDLE hFile, LPCWSTR lpFileBuffer)
 {
 	BOOL hWrite = WriteFile(
 		hFile,
-		FileBuffer,
-		lstrlenW(FileBuffer) * sizeof(WCHAR),
+		lpFileBuffer,
+		lstrlenW(lpFileBuffer) * sizeof(WCHAR),
 		0,
 		NULL
 	);
@@ -62,7 +73,7 @@ BOOL File::Write(HANDLE hFile, LPCWSTR FileBuffer)
 	return hWrite;
 }
 
-BOOL File::Read(LPCWSTR FileName)
+BOOL File::Read(LPCWSTR lpFileName)
 {
 	BOOL hFile = ReadFile(
 		NULL, NULL,
@@ -72,4 +83,4 @@ BOOL File::Read(LPCWSTR FileName)
 	return TRUE;
 }
 
-#endif /* defined(_WIN32) | defined(_WIN64) */
+#endif /* defined(_WIN32) || defined(_WIN64) */
