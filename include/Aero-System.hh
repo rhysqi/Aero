@@ -17,10 +17,6 @@ namespace Aero_System {
 		HANDLE Remove(LPCWSTR lpDirName);
 	}
 
-	namespace Error {
-		INT ShowLastError();
-	}
-
 	namespace File {
 		HANDLE Create(LPCWSTR FileName, LPSECURITY_ATTRIBUTES AttrSec, DWORD dwFlagsAndAttribute);
 
@@ -32,6 +28,13 @@ namespace Aero_System {
 		BOOL Write(HANDLE hFile, LPCWSTR lpFileBuffer);
 		BOOL WriteEx(HANDLE hFile, LPCWSTR lpFileBuffer);
 	}
+
+	// Inform definition
+    namespace Inform {
+		INT ShowErrorWithoutTerminate();
+		INT ShowLastError();
+		INT ShowMessage(LPCWSTR lpMessage);
+    }
 
 	namespace Util {
 		UINT DisplayHeight();
