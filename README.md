@@ -11,11 +11,11 @@ This approach gives developers more control over how the system resources are ma
 - Storage: Using SSD is Recommended
 
 # Features
-- Accelerated Compute World Generation
-- Accelerated Compute Shader Generation
-- World Planet Gravity Object
-- Object Culling
-- Embedded Media Assets with Windows CNG Protection
+- [ ] Accelerated Compute World Generation
+- [ ] Accelerated Compute Shader Generation
+- [ ] World Planet Gravity Object
+- [ ] Object Culling
+- [ ] Embedded Media Assets with Windows CNG Protection
 
 # Libraries, Toolchains & Programming Language
 - [x] Windows API (10.0.26100.0)
