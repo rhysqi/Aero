@@ -1,5 +1,5 @@
-CC		=	clang
-CXX		=	clang++
+CC		:=	clang
+CXX		:=	clang++
 
 OPT_F	=	-fcrash-diagnostics  -fdirectives-only -fenable-matrix \
 			-fstrict-float-cast-overflow -fstrict-vtable-pointers \
@@ -7,25 +7,29 @@ OPT_F	=	-fcrash-diagnostics  -fdirectives-only -fenable-matrix \
 			-fstack-protector-strong -fvectorize
 
 OPT_Fno	=	-fno-autolink -fno-builtin -fno-cxx-modules \
-			-fno-convergent-functions -fno-courotines \
+			-fno-convergent-functions -fno-coverage-mapping \
 			-fno-experimental-library -fno-exceptions \
 			-fno-strict-aliasing
 
 OPT_M	=	-mavx -mavx2 -msse -msse4.2 \
-			-mlvi-cfi -mlvi-hardening \
+			-mlvi-cfi -mseses \
 			-mstack-arg-probe -mstackrealign
 
-OPT_Mno	=	-mno-sse2 -mno-sse3 \
-			-mno-outline-atomics
+OPT_Mno	=	-mno-sse2 -mno-sse3
 			
-OPT_W	=	-Wall -Wabi -WClass-convertion -WDeprecated -Wformat-security \
+OPT_W	=	-Wall -Wabi -Wclass-conversion -Wdeprecated -Wformat-security \
 			-Wunused -Wuninitialized -Wextra
 
 OPT_Wno	=	-Wno-pedantic
 
-OPT_Wl	=	-Wl",/DYNAMICBASE:YES" -Wl",/ENTRY:wmain" \
-			-Wl",/LARGEADDRESSNAME:YES" -Wl",/NODEFAULTLIB"
+OPT_Wl	=	-Wl",/DYNAMICBASE" -Wl",/LARGEADDRESSAWARE" -Wl",/NODEFAULTLIB" \
+			-Wl",/ENTRY:wWinMain" -Wl",/SUBSYSTEM:WINDOWS"
 
-OPT_Uni	=	-v -H
+OPT_Uni	=	
 
-LIB_CXX	=	-luser32
+OPT		=	$(OPT_F) $(OPT_Fno) $(OPT_M) $(OPT_Mno) \
+			$(OPT_W) $(OPT_Wno) $(OPT_Wl) $(OPT_Uni)
+
+CC_Com	=	$(CC) $(OPT)
+CX_Com	=	$(CXX) $(OPT)
+
