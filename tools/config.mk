@@ -14,7 +14,7 @@ OPT_Fno	=	-fno-autolink -fno-builtin -fno-cxx-modules \
 			-fno-strict-aliasing
 
 # Compiler options for machine flags
-OPT_M	=	-mavx2 -msse -msse4.2 \
+OPT_M	=	-mavx2 -msse4.2 \
 			-mlvi-cfi -mseses \
 			-mstack-arg-probe -mstackrealign
 
@@ -30,6 +30,7 @@ OPT_Wno	=	-Wno-pedantic
 OPT_Wl	=	-Wl",/DYNAMICBASE" -Wl",/LARGEADDRESSAWARE" -Wl",/NODEFAULTLIB" \
 			-Wl",/INTEGRITYCHECK" -Wl",/HIGHENTROPYVA" -Wl",/MACHINE:x64"
 
+# Compiler options for Windows universal flags
 OPT_Uni	=	-v -H
 
 OPT		=	$(OPT_F) $(OPT_Fno) $(OPT_M) $(OPT_Mno) \
@@ -44,7 +45,7 @@ C_PE	=	$(C_LIB)
 CXX_PE	=	$(CXX_LIB)
 
 # Windows LLVM linker configuration
-LINK	=	lld-link \
+LINK_PE	=	lld-link \
 			/entry:wWinMain /subsystem:WINDOWS /integritycheck \
 			/largeaddressaware /highentropyva /dynamicbase \
 			/incremental:no /appcontainer:no /nodefaultlib \
