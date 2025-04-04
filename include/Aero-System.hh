@@ -36,6 +36,18 @@ namespace Aero_System {
 		INT ShowMessage(LPCWSTR lpMessage);
     }
 
+	namespace Pool {
+		namespace Memory {
+			HANDLE Virtual(INT PoolCount, LPVOID lpMemoryInit);
+			HANDLE Heap(INT PoolCount, LPVOID lpMemoryInit);
+
+			BOOL Lock(HANDLE lpMemoryPool);
+			BOOL Unlock(HANDLE lpMemoryPool);
+			BOOL Free(HANDLE lpMemoryPool);
+			BOOL Destroy(HANDLE lpMemoryPool);
+		}
+	}
+
 	namespace Util {
 		UINT DisplayHeight();
 		UINT DisplayWidth();
