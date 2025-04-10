@@ -1,45 +1,21 @@
 # Build setup
-BIN		:=	bin
-BUILD	:=	build
+BIN_DIR		:=	bin
+BUILD_DIR	:=	build
 
-.PHONY: setup-win32
-setup-win32:
-	# Check build folder
-	@if not exist $(BUILD) ( \
-		mkdir $(BUILD) & echo Directory $(BUILD) created. \
+.PHONY: setup-build
+setup-build:
+	@echo Setting up setup directory...
+	
+	@if exist "$(BIN_DIR)" ( \
+		@echo Directory $(BIN_DIR) already exists. \
 	) else ( \
-		echo Directory $(BUILD) already exists. \
+		@echo Creating directory $(BIN_DIR)... && \
+		@mkdir $(BIN_DIR) \
 	)
 
-	@if not exist $(BUILD)\\graphics ( \
-		mkdir $(BUILD)\\graphics & echo Directory $(BUILD)\\graphics created. \
+	@if exist "$(BUILD_DIR)" ( \
+		@echo Directory $(BUILD_DIR) already exists. \
 	) else ( \
-		echo Directory $(BUILD)\\graphics already exists. \
+		@echo Creating directory $(BUILD_DIR)... && \
+		@mkdir $(BUILD_DIR) \
 	)
-
-	@if not exist $(BUILD)\\system ( \
-		mkdir $(BUILD)\\system & echo Directory $(BUILD)\\system created. \
-	) else ( \
-		echo Directory $(BUILD)\\system already exists. \
-	)
-
-	@if not exist $(BUILD)\\security ( \
-		mkdir $(BUILD)\\security & echo Directory $(BUILD)\\security created. \
-	) else ( \
-		echo Directory $(BUILD)\\security already exists. \
-	)
-
-	# Check bin folder
-	@if not exist $(BIN) ( \
-		mkdir $(BIN) & echo Directory $(BIN) created. \
-	) else ( \
-		echo Directory $(BIN) already exists. \
-	)
-
-	@if not exist $(BIN)\\lib ( \
-		mkdir $(BIN)\\lib & echo Directory $(BIN)\\lib created. \
-	) else ( \
-		echo Directory $(BIN)\\lib already exists. \
-	)
-
-setup-unix:
