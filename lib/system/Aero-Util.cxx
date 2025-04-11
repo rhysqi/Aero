@@ -1,8 +1,8 @@
-#if defined(_WIN32) || defined(_WIN64)
-
 #ifndef UNICODE
 #define UNICODE
 #endif /* UNICODE */
+
+#if defined(_WIN32) || defined(_WIN64)
 
 #include "../../include/Aero-System.hh"
 
@@ -10,19 +10,17 @@
 #include <winuser.h>
 #include <windef.h>
 
-using namespace Aero_System;
-
-UINT Util::DisplayHeight()
+UINT Aero_System::Util::DisplayHeight()
 {
 	return GetSystemMetrics(SM_CXSCREEN);
 }
 
-UINT Util::DisplayWidth()
+UINT Aero_System::Util::DisplayWidth()
 {
 	return GetSystemMetrics(SM_CYSCREEN);
 }
 
-UINT Util::WindowHeight(HWND hWnd)
+UINT Aero_System::Util::WindowHeight(HWND hWnd)
 {
 	RECT rect;
 	if (GetWindowRect(hWnd, &rect)) {
@@ -31,7 +29,7 @@ UINT Util::WindowHeight(HWND hWnd)
 	return 0;
 }
 
-UINT Util::WindowWidth(HWND hWnd)
+UINT Aero_System::Util::WindowWidth(HWND hWnd)
 {
 	RECT rect;
 	if (GetWindowRect(hWnd, &rect)) {
@@ -40,7 +38,7 @@ UINT Util::WindowWidth(HWND hWnd)
 	return 0;
 }
 
-VOID Util::MicroSleep(UINT64 uMicroSeconds)
+VOID Aero_System::Util::MicroSleep(UINT64 uMicroSeconds)
 {
     LARGE_INTEGER frequency;
     QueryPerformanceFrequency(&frequency);
@@ -56,7 +54,7 @@ VOID Util::MicroSleep(UINT64 uMicroSeconds)
     } while ((current.QuadPart - start.QuadPart) < targetTicks);
 }
 
-VOID Util::NanoSleep(UINT64 uwNanoSeconds)
+VOID Aero_System::Util::NanoSleep(UINT64 uwNanoSeconds)
 {
     LARGE_INTEGER frequency;
     QueryPerformanceFrequency(&frequency);
