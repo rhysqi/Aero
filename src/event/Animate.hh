@@ -9,27 +9,38 @@
 
 #include <Windows.h>
 
-VOID Linear(FLOAT fSpeed);
+typedef struct {
+	FLOAT fSpeed;
+	FLOAT fEasingFactor;
+	UINT uDuration;
+	UINT uInterval;
+} Aero_Easing_Data_t, *pAero_Easing_Data_t;
 
-VOID EaseIn_Miliseconds(FLOAT fSpeed, FLOAT fAcceleration, UINT uIntervalMS);
-VOID EaseOut_Miliseconds(FLOAT fSpeed, FLOAT fAcceleration, UINT uIntervalMS);
-VOID EaseInOut_Miliseconds(FLOAT fSpeed, FLOAT fAcceleration, UINT uIntervalMS);
+PVOID Linear(FLOAT fSpeed);
 
-VOID BounceIn_Miliseconds(FLOAT fSpeed, FLOAT fBounceFactor, UINT uIntervalMS);
-VOID BounceOut_Miliseconds(FLOAT fSpeed, FLOAT fBounceFactor, UINT uIntervalMS);
-VOID BounceInOut_Miliseconds(FLOAT fSpeed, FLOAT fBounceFactor, UINT uIntervalMS);
+PVOID EaseIn_Miliseconds(pAero_Easing_Data_t Easing_Data);
+PVOID EaseOut_Miliseconds(pAero_Easing_Data_t Easing_Data);
+PVOID EaseInOut_Miliseconds(pAero_Easing_Data_t Easing_Data);
 
-VOID ElasticIn_Miliseconds(FLOAT fSpeed, FLOAT fElasticFactor, UINT uIntervalMS);
-VOID ElasticOut_Miliseconds(FLOAT fSpeed, FLOAT fElasticFactor, UINT uIntervalMS);
-VOID ElasticInOut_Miliseconds(FLOAT fSpeed, FLOAT fElasticFactor, UINT uIntervalMS);
+PVOID BounceIn_Miliseconds(pAero_Easing_Data_t Easing_Data);
+PVOID BounceOut_Miliseconds(pAero_Easing_Data_t Easing_Data);
+PVOID BounceInOut_Miliseconds(pAero_Easing_Data_t Easing_Data);
 
-VOID BackIn_Miliseconds(FLOAT fSpeed, FLOAT fBackFactor, UINT uIntervalMS);
-VOID BackOut_Miliseconds(FLOAT fSpeed, FLOAT fBackFactor, UINT uIntervalMS);
-VOID BackInOut_Miliseconds(FLOAT fSpeed, FLOAT fBackFactor, UINT uIntervalMS);
+PVOID ElasticIn_Miliseconds(pAero_Easing_Data_t Easing_Data);
+PVOID ElasticOut_Miliseconds(pAero_Easing_Data_t Easing_Data);
+PVOID ElasticInOut_Miliseconds(pAero_Easing_Data_t Easing_Data);
 
-VOID SineIn_Miliseconds(FLOAT fSpeed, FLOAT fSineFactor, UINT uIntervalMS);
-VOID SineOut_Miliseconds(FLOAT fSpeed, FLOAT fSineFactor, UINT uIntervalMS);
-VOID SineInOut_Miliseconds(FLOAT fSpeed, FLOAT fSineFactor, UINT uIntervalMS);
+PVOID BackIn_Miliseconds(pAero_Easing_Data_t Easing_Data);
+PVOID BackOut_Miliseconds(pAero_Easing_Data_t Easing_Data);
+PVOID BackInOut_Miliseconds(pAero_Easing_Data_t Easing_Data);
+
+PVOID SineIn_Miliseconds(pAero_Easing_Data_t Easing_Data);
+PVOID SineOut_Miliseconds(pAero_Easing_Data_t Easing_Data);
+PVOID SineInOut_Miliseconds(pAero_Easing_Data_t Easing_Data);
+
+PVOID ExponentialIn_Miliseconds(pAero_Easing_Data_t Easing_Data);
+PVOID ExponentialOut_Miliseconds(pAero_Easing_Data_t Easing_Data);
+PVOID ExponentialInOut_Miliseconds(pAero_Easing_Data_t Easing_Data);
 
 #endif /* defined(_WIN32) || defined(_WIN64) */
 #endif /* AERO_SRC_EVENT_ANIMATE_HH */
