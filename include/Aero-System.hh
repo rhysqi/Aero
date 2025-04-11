@@ -1,22 +1,29 @@
 #ifndef AERO_SYSTEM_HH
 #define AERO_SYSTEM_HH
 
+#ifndef UNICODE
+#define UNICODE
+#endif /* UNICODE */
+
 #if defined(_WIN32) || defined(_WIN64)
 
 #include <windows.h>
 #include <winnt.h>
 
 namespace Aero_System {
+	// Diagnostic definition
 	namespace Diagnostic {
 		HANDLE FileWatcher(LPCWSTR lpFilepath);
 		HANDLE CPU_Usage(UINT64 uInterval);
 	}
 
+	// Directory definition
 	namespace Directory {
 		HANDLE Create(LPCWSTR lpDirName, LPSECURITY_ATTRIBUTES saAttrSec);
 		HANDLE Remove(LPCWSTR lpDirName);
 	}
 
+	// File definition
 	namespace File {
 		HANDLE Create(LPCWSTR FileName, LPSECURITY_ATTRIBUTES AttrSec, DWORD dwFlagsAndAttribute);
 
@@ -36,18 +43,38 @@ namespace Aero_System {
 		INT ShowMessage(LPCWSTR lpMessage);
     }
 
+	// Memory Pool definition
 	namespace Pool {
 		namespace Memory {
-			HANDLE Virtual(INT PoolCount, LPVOID lpMemoryInit);
-			HANDLE Heap(INT PoolCount, LPVOID lpMemoryInit);
+			namespace Heap {
+				LPVOID Create(INT PoolCount, LPVOID lpMemoryInit);
+				BOOL CountPool(LPVOID lpMemoryPool);
 
-			BOOL Lock(HANDLE lpMemoryPool);
-			BOOL Unlock(HANDLE lpMemoryPool);
-			BOOL Free(HANDLE lpMemoryPool);
-			BOOL Destroy(HANDLE lpMemoryPool);
+				BOOL Lock(LPVOID lpMemoryPool);
+				BOOL Unlock(LPVOID lpMemoryPool);
+				BOOL Free(LPVOID lpMemoryPool);
+				BOOL Destroy(LPVOID lpMemoryPool);
+			}
+
+			namespace Virtual {
+				LPVOID Create(INT PoolCount, LPVOID lpMemoryInit);
+				BOOL CountPool(LPVOID lpMemoryPool, DWORD dwProtection);
+
+				BOOL Protect(LPVOID lpMemoryPool, DWORD dwProtection);
+				BOOL Lock(LPVOID lpMemoryPool);
+				BOOL Unlock(LPVOID lpMemoryPool);
+				BOOL Free(LPVOID lpMemoryPool);
+				BOOL Destroy(LPVOID lpMemoryPool);
+			}
+		}
+
+		namespace Process {
+			LPBOOL Create(UINT32 dwProcessCount, BOOL bProcessInit);
+			LPBOOL Terminate(HANDLE hProcess, DWORD dwExitCode);
 		}
 	}
 
+	// Utils definition
 	namespace Util {
 		UINT DisplayHeight();
 		UINT DisplayWidth();

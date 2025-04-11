@@ -1,6 +1,10 @@
 #ifndef AERO_CODEC_HH
 #define AERO_CODEC_HH
 
+#ifndef UNICODE
+#define UNICODE
+#endif /* UNICODE */
+
 #if defined(_WIN32) || defined(_WIN64)
 
 #include <Windows.h>

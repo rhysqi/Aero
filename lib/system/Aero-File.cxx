@@ -1,3 +1,7 @@
+#ifndef UNICODE
+#define UNICODE
+#endif /* UNICODE */
+
 #if defined(_WIN32) || defined(_WIN64)
 
 #include "../../include/Aero-System.hh"
@@ -11,9 +15,10 @@
 #include <handleapi.h>
 #include <fileapi.h>
 
-using namespace Aero_System;
+#pragma comment(lib, "user32.lib")
+#pragma comment(lib, "kernel32.lib")
 
-HANDLE File::Create(LPCWSTR lpFileName, LPSECURITY_ATTRIBUTES AttrSec, DWORD dwFlagsAndAttribute)
+HANDLE Aero_System::File::Create(LPCWSTR lpFileName, LPSECURITY_ATTRIBUTES AttrSec, DWORD dwFlagsAndAttribute)
 {
 	LPSECURITY_ATTRIBUTES saFile = (LPSECURITY_ATTRIBUTES)VirtualAlloc(
 		NULL,
@@ -23,7 +28,7 @@ HANDLE File::Create(LPCWSTR lpFileName, LPSECURITY_ATTRIBUTES AttrSec, DWORD dwF
 	);
 
 	if (saFile == NULL) {
-		Error::ShowLastError();
+		Inform::ShowLastError();
 		return NULL;
 	}
 
@@ -48,14 +53,14 @@ HANDLE File::Create(LPCWSTR lpFileName, LPSECURITY_ATTRIBUTES AttrSec, DWORD dwF
 	);
 
 	if (hFile == INVALID_HANDLE_VALUE) {
-		Error::ShowLastError();
+		Inform::ShowLastError();
 		return (HANDLE)-1;
 	}
 	
 	return hFile;
 }
 
-BOOL File::Write(HANDLE hFile, LPCWSTR lpFileBuffer)
+BOOL Aero_System::File::Write(HANDLE hFile, LPCWSTR lpFileBuffer)
 {
 	BOOL hWrite = WriteFile(
 		hFile,
@@ -66,14 +71,14 @@ BOOL File::Write(HANDLE hFile, LPCWSTR lpFileBuffer)
 	);
 	
 	if (hWrite == FALSE) {
-		Error::ShowLastError();
+		Inform::ShowLastError();
 		return FALSE;
 	}
 
 	return hWrite;
 }
 
-BOOL File::Read(LPCWSTR lpFileName)
+BOOL Aero_System::File::Read(LPCWSTR lpFileName)
 {
 	BOOL hFile = ReadFile(
 		NULL, NULL,

@@ -1,6 +1,10 @@
 #ifndef AERO_GRAPHICS_HH
 #define AERO_GRAPHICS_HH
 
+#ifndef UNICODE
+#define UNICODE
+#endif /* UNICODE */
+
 #if defined(_WIN32) || defined(_WIN64)
 
 #include <Windows.h>
@@ -8,17 +12,25 @@
 #include <winnt.h>
 
 namespace Aero_Graphics {
+	// Utils definitions
 	namespace Util {
-		UINT getFPS();
+		INT32 getFPS(HWND hWnd);
+		INT32 getMemryUsage(HWND hWnd);
+		INT32 getCPULoad(HWND hWnd);
+		INT32 getGPUUsage(HWND hWnd);
 	}
-
-	namespace Entity {
+	
+	// Raster graphics definitions
+	namespace Raster {
 		
 	}
 
-	namespace Render {
-		PVOID Block(PBYTE lpTexture);
-		PBYTE Texture();
+	// Vector graphics definitions
+	namespace Vector {
+		typedef struct {
+			INT32 x;
+			INT32 y;
+		} Point, *pPoint;
 	}
 }
 
