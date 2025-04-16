@@ -1,6 +1,7 @@
 #ifndef AERO_SYSTEM_HH
 #define AERO_SYSTEM_HH
 
+#include "basetsd.h"
 #ifndef UNICODE
 #define UNICODE
 #endif /* UNICODE */
@@ -48,7 +49,8 @@ namespace Aero_System {
 		namespace Memory {
 			namespace Heap {
 				LPVOID Create(INT PoolCount, LPVOID lpMemoryInit);
-				BOOL CountPool(LPVOID lpMemoryPool);
+				UINT CountPool(LPVOID lpMemoryPool);
+				LPVOID Peek(LPVOID lpMemoryPool, UINT offset);
 
 				BOOL Lock(LPVOID lpMemoryPool);
 				BOOL Unlock(LPVOID lpMemoryPool);
@@ -58,7 +60,8 @@ namespace Aero_System {
 
 			namespace Virtual {
 				LPVOID Create(INT PoolCount, LPVOID lpMemoryInit);
-				BOOL CountPool(LPVOID lpMemoryPool, DWORD dwProtection);
+				UINT CountPool(LPVOID lpMemoryPool);
+				LPVOID Peek(LPVOID lpMemoryPool, UINT offset);
 
 				BOOL Protect(LPVOID lpMemoryPool, DWORD dwProtection);
 				BOOL Lock(LPVOID lpMemoryPool);
@@ -69,13 +72,16 @@ namespace Aero_System {
 		}
 
 		namespace Process {
-			LPBOOL Create(UINT32 dwProcessCount, BOOL bProcessInit);
+			LPBOOL Create(UINT16 uProcessCount, BOOL bProcessInit);
 			LPBOOL Terminate(HANDLE hProcess, DWORD dwExitCode);
 		}
 	}
 
 	// Utils definition
 	namespace Util {
+		BOOL SSE42_Support();
+		BOOL AVX2_Support();
+		
 		UINT DisplayHeight();
 		UINT DisplayWidth();
 

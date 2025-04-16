@@ -31,7 +31,7 @@ OPT_Wl	=	-Wl",/DYNAMICBASE" -Wl",/LARGEADDRESSAWARE" -Wl",/NODEFAULTLIB" \
 			-Wl",/INTEGRITYCHECK" -Wl",/HIGHENTROPYVA" -Wl",/MACHINE:x64"
 
 # Compiler options for Windows universal flags
-OPT_Uni	=	-v -H
+OPT_Uni	=	-std=c++17 -v -H
 
 OPT		=	$(OPT_F) $(OPT_Fno) $(OPT_M) $(OPT_Mno) \
 			$(OPT_W) $(OPT_Wno) $(OPT_Wl) $(OPT_Uni)

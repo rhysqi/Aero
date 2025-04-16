@@ -19,3 +19,5 @@ setup-build:
 		@echo Creating directory $(BUILD_DIR)... && \
 		@mkdir $(BUILD_DIR) \
 	)
+
+	@echo Setup complete.

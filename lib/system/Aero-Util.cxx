@@ -19,10 +19,15 @@
 BOOL Aero_System::Util::SSE42_Support()
 {
     if (IsProcessorFeaturePresent(PF_SSE4_2_INSTRUCTIONS_AVAILABLE)) {
+        #ifdef _DEBUG
         MessageBoxW(NULL, L"SSE4.2 is supported", L"Information", MB_OK | MB_ICONINFORMATION);
+        #endif /* _DEBUG */
+
         return TRUE;
     }
+    #ifdef _DEBUG
     MessageBoxW(NULL, L"SSE4.2 is not supported", L"Information", MB_OK | MB_ICONERROR);
+    #endif /* _DEBUG */
 
     return FALSE;
 }
@@ -30,10 +35,15 @@ BOOL Aero_System::Util::SSE42_Support()
 BOOL Aero_System::Util::AVX2_Support()
 {
     if (IsProcessorFeaturePresent(PF_XMMI64_INSTRUCTIONS_AVAILABLE)) {
+        #ifdef _DEBUG
         MessageBoxW(NULL, L"AVX2 is supported", L"Information", MB_OK | MB_ICONINFORMATION);
+        #endif /* _DEBUG */
+
         return TRUE;
     }
+    #ifdef _DEBUG
     MessageBoxW(NULL, L"AVX2 is not supported", L"Information", MB_OK | MB_ICONERROR);
+    #endif /* _DEBUG */
 
     return FALSE;
 }

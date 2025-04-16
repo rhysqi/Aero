@@ -2,11 +2,10 @@ include tools/config.mk
 include tools/lib.mk
 include tools/setup.mk
 
-.PHONY: buildware-win32-elf  buildware-win32-lib
-buildware-win32-lib: setup-win32
-	@echo Building Library ...
-	$(CXX)
+.PHONY: buildware-Win64-pe  buildware-Win64-lib
+buildware-Win64-pe: buildware-Win64-lib
+	@echo Building project ...
 
-buildware-win32-elf: buildware-win32-lib
-	@echo Building ELF
-	$(CXX)
+buildware-Win64-lib: setup-Win64
+	@echo Building static Library ...
+	
