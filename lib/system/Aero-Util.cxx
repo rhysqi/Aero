@@ -10,6 +10,34 @@
 #include <winuser.h>
 #include <windef.h>
 
+#include <winnt.h>
+#include <processthreadsapi.h>
+
+#pragma comment(lib, "user32.lib")
+#pragma comment(lib, "kernel32.lib")
+
+BOOL Aero_System::Util::SSE42_Support()
+{
+    if (IsProcessorFeaturePresent(PF_SSE4_2_INSTRUCTIONS_AVAILABLE)) {
+        MessageBoxW(NULL, L"SSE4.2 is supported", L"Information", MB_OK | MB_ICONINFORMATION);
+        return TRUE;
+    }
+    MessageBoxW(NULL, L"SSE4.2 is not supported", L"Information", MB_OK | MB_ICONERROR);
+
+    return FALSE;
+}
+
+BOOL Aero_System::Util::AVX2_Support()
+{
+    if (IsProcessorFeaturePresent(PF_XMMI64_INSTRUCTIONS_AVAILABLE)) {
+        MessageBoxW(NULL, L"AVX2 is supported", L"Information", MB_OK | MB_ICONINFORMATION);
+        return TRUE;
+    }
+    MessageBoxW(NULL, L"AVX2 is not supported", L"Information", MB_OK | MB_ICONERROR);
+
+    return FALSE;
+}
+
 UINT Aero_System::Util::DisplayHeight()
 {
 	return GetSystemMetrics(SM_CXSCREEN);
