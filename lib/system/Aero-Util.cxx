@@ -34,7 +34,7 @@ BOOL Aero_System::Util::SSE42_Support()
 
 BOOL Aero_System::Util::AVX2_Support()
 {
-    if (IsProcessorFeaturePresent(PF_XMMI64_INSTRUCTIONS_AVAILABLE)) {
+    if (IsProcessorFeaturePresent(PF_AVX2_INSTRUCTIONS_AVAILABLE)) {
         #ifdef _DEBUG
         MessageBoxW(NULL, L"AVX2 is supported", L"Information", MB_OK | MB_ICONINFORMATION);
         #endif /* _DEBUG */
