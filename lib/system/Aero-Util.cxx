@@ -1,3 +1,15 @@
+// ----------------------------------------
+//  Utitlity functions for Aero System
+//  This file is part of Aero System library
+//  Included function:
+//  - SIMD support check
+//  - Display resolution check
+//  - Window client area size check
+//  - Sleep function
+// ----------------------------------------
+//  Written by: Risky Akbar, 2025
+// ----------------------------------------
+
 #ifndef UNICODE
 #define UNICODE
 #endif /* UNICODE */
@@ -8,8 +20,9 @@
 
 #include <Windows.h>
 #include <winuser.h>
-#include <windef.h>
+#include <winbase.h>
 
+#include <windef.h>
 #include <winnt.h>
 #include <processthreadsapi.h>
 
@@ -55,6 +68,11 @@ UINT Aero_System::Util::DisplayHeight()
 
 UINT Aero_System::Util::DisplayWidth()
 {
+    #ifdef _DEBUG
+    // LPCWSTR lpMessage = 
+
+    #endif /* _DEBUG */
+    wsprintfW(NULL, NULL, NULL);
 	return GetSystemMetrics(SM_CYSCREEN);
 }
 
