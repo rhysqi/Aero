@@ -30,4 +30,5 @@ This approach gives developers more control over how the system resources are ma
 - [x] Makefile
 
 # Notes
-If you are looking for media file such as audio files, image files, or similar like this it doesn't available in releases binary.
+- If you are looking for media file such as audio files, image files, or similar like this it doesn't available in releases binary.
+- This project still under developments. Contribution and feedback are welcome!
