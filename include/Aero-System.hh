@@ -72,16 +72,18 @@ namespace Aero_System {
 					UINT uOffset;
 				} Heap_Pool_t, *pHeap_Pool_t;
 
-				LPVOID Create(INT PoolCount, pHeap_Pool_t pHeapPool);
-				UINT CountPool(LPVOID lpMemoryPool);
-				LPVOID Peek(LPVOID lpMemoryPool, UINT uIndex);
+				LPVOID Alloc(INT PoolCount, pHeap_Pool_t pHeapPool);
+				UINT CountPool(LPVOID *lpMemoryPool);
+				LPVOID Peek(LPVOID *lpMemoryPool, UINT uIndex);
 
-				BOOL Lock(LPVOID lpMemoryPool);
-				BOOL LockEx(LPVOID lpMemoryPool, UINT uIndex);
-				BOOL Unlock(LPVOID lpMemoryPool);
-				BOOL UnlockEx(LPVOID lpMemoryPool, UINT uIndex);
-				BOOL Free(LPVOID lpMemoryPool);
-				BOOL Destroy(LPVOID lpMemoryPool);
+				BOOL Lock(LPVOID *lpMemoryPool);
+				BOOL LockEx(LPVOID *lpMemoryPool, UINT uIndex);
+				BOOL Unlock(LPVOID *lpMemoryPool);
+				BOOL UnlockEx(LPVOID *lpMemoryPool, UINT uIndex);
+				BOOL Free(LPVOID *lpMemoryPool);
+				BOOL FreeEx(LPVOID *lpMemoryPool, UINT uIndex);
+				BOOL Destroy(LPVOID *lpMemoryPool);
+				BOOL DestroyEx(LPVOID *lpMemoryPool, UINT uIndex);
 			}
 
 			// Virtual definition
@@ -94,18 +96,24 @@ namespace Aero_System {
 					UINT uOffset;
 				} Virtual_Pool_t, *pVirtual_Pool_t;
 
-				LPVOID Create(INT PoolCount, pVirtual_Pool_t pVirtualPool);
-				UINT CountPool(LPVOID lpMemoryPool);
-				LPVOID Peek(LPVOID lpMemoryPool, UINT uIndex);
+				LPVOID Alloc(INT PoolCount, pVirtual_Pool_t pVirtualPool);
+				UINT CountPool(LPVOID *lpMemoryPool);
+				LPVOID Peek(LPVOID *lpMemoryPool, UINT uIndex);
 
-				BOOL Protect(LPVOID lpMemoryPool, DWORD dwProtection);
-				BOOL ProtectEx(LPVOID lpMemoryPool, DWORD dwProtection, UINT uIndex);
-				BOOL Lock(LPVOID lpMemoryPool);
-				BOOL LockEx(LPVOID lpMemoryPool, UINT uIndex);
-				BOOL Unlock(LPVOID lpMemoryPool);
-				BOOL UnlockEx(LPVOID lpMemoryPool, UINT uIndex);
-				BOOL Free(LPVOID lpMemoryPool, DWORD dwFreeType);
+				BOOL Protect(LPVOID *lpMemoryPool, DWORD dwProtection);
+				BOOL ProtectEx(LPVOID *lpMemoryPool, DWORD dwProtection, UINT uIndex);
+				BOOL Lock(LPVOID *lpMemoryPool);
+				BOOL LockEx(LPVOID *lpMemoryPool, UINT uIndex);
+				BOOL Unlock(LPVOID *lpMemoryPool);
+				BOOL UnlockEx(LPVOID *lpMemoryPool, UINT uIndex);
+				BOOL Free(LPVOID *lpMemoryPool, DWORD dwFreeType);
+				BOOL FreeEx(LPVOID *lpMemoryPool, DWORD dwFreeType, UINT uIndex);
 			}
+		}
+
+		// Thread Definition
+		namespace Thread {
+			
 		}
 	}
 
@@ -134,6 +142,7 @@ namespace Aero_System {
 	namespace Util {
 		BOOL SSE42_Support();
 		BOOL AVX2_Support();
+		BOOL GPU_Enums();
 		
 		UINT DisplayHeight();
 		UINT DisplayWidth();
