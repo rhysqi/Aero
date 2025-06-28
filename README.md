@@ -21,7 +21,7 @@ This approach gives developers more control over how the system resources are ma
 - [x] Windows API (10.0.26100.0)
 - [x] Windows Codec API
 - [x] OpenGL 4
-- [x] Clang/LLVM (17.0.5)
+- [x] Clang/LLVM (20.1.0)
 - [ ] SPIR-V
 - [x] KTX
 - [x] SSE4.2
