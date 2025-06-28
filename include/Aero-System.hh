@@ -26,10 +26,16 @@
 #include <basetsd.h>
 
 namespace Aero_System {
+	// Console definition
+	namespace Console {
+		
+	}
+
 	// Diagnostic definition
 	namespace Diagnostic {
 		HANDLE FileWatcher(LPCWSTR lpFilepath);
 		HANDLE CPU_Usage(UINT64 uInterval);
+		HANDLE Memory_Usage(UINT64 uInterval);
 	}
 
 	// Directory definition
@@ -56,6 +62,20 @@ namespace Aero_System {
 		INT ShowErrorWithoutTerminate();
 		INT ShowLastError();
 		INT ShowMessage(LPCWSTR lpMessage);
+
+		namespace GUI {
+			INT ShowErrorA();
+			INT ShowErrorW();
+			INT ShowMessageA(LPCSTR lpMessage);
+			INT ShowMessageW(LPCWSTR lpMessage);
+		}
+		
+		namespace Console {
+			INT ShowErrorA();
+			INT ShowErrorW();
+			INT ShowMessageA(LPCSTR lpMessage);
+			INT ShowMessageW(LPCWSTR lpMessage);
+		}
     }
 
 	// Pool definition
@@ -102,6 +122,9 @@ namespace Aero_System {
 
 				BOOL Protect(LPVOID *lpMemoryPool, DWORD dwProtection);
 				BOOL ProtectEx(LPVOID *lpMemoryPool, DWORD dwProtection, UINT uIndex);
+				BOOL ProtectProc(HANDLE hProces, LPVOID *lpMemoryPool, DWORD dwProtection);
+				BOOL ProtectProcEx(HANDLE hProces, LPVOID *lpMemoryPool, DWORD dwProtection, UINT uIndex);
+				
 				BOOL Lock(LPVOID *lpMemoryPool);
 				BOOL LockEx(LPVOID *lpMemoryPool, UINT uIndex);
 				BOOL Unlock(LPVOID *lpMemoryPool);
@@ -113,7 +136,9 @@ namespace Aero_System {
 
 		// Thread Definition
 		namespace Thread {
-			
+			HANDLE Create(LPTHREAD_START_ROUTINE lpStartAddress, LPVOID lpParameter, DWORD dwCreationFlags, LPDWORD lpThreadId);
+			BOOL Terminate(HANDLE hThread, DWORD dwExitCode);
+			BOOL Suspend(HANDLE hThread, DWORD dwSuspendCount);
 		}
 	}
 
@@ -143,6 +168,7 @@ namespace Aero_System {
 		BOOL SSE42_Support();
 		BOOL AVX2_Support();
 		BOOL GPU_Enums();
+		BOOL Debugger();
 		
 		UINT DisplayHeight();
 		UINT DisplayWidth();
@@ -157,6 +183,25 @@ namespace Aero_System {
 		VOID NanoSleep(UINT64 uNanoSeconds);
 	}
 }
+
+#pragma region Inform macros
+// Unicode-aware macro aliases for CLI and GUI message display functions
+
+#ifdef UNICODE
+#define ShowError_CLI   Aero_System::Inform::Console::ShowErrorW
+#define ShowMessage_CLI Aero_System::Inform::Console::ShowMessageW
+
+#define ShowError_GUI   Aero_System::Inform::GUI::ShowErrorW
+#define ShowMessage_GUI Aero_System::Inform::GUI::ShowMessageW
+#else
+#define ShowError_CLI   Aero_System::Inform::Console::ShowErrorA
+#define ShowMessage_CLI Aero_System::Inform::Console::ShowMessageA
+
+#define ShowError_GUI   Aero_System::Inform::GUI::ShowErrorA
+#define ShowMessage_GUI Aero_System::Inform::GUI::ShowMessageA
+#endif /* UNICODE */
+
+#pragma endregion
 
 #endif /* defined(_WIN32) || defined(_WIN64) */
 #endif /* AERO_SYSTEM_HH */
