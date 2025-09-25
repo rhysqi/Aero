@@ -1,12 +1,6 @@
 #ifndef AERO_SYSTEM_HH
 #define AERO_SYSTEM_HH
 
-#ifndef UNICODE
-#define UNICODE
-#endif /* UNICODE */
-
-#if defined(_WIN32) || defined(_WIN64)
-
 #define AERO_USE_MIN_POOL 4
 #define AERO_USE_MAX_POOL (AERO_USE_MIN_POOL << 4)
 
@@ -18,6 +12,14 @@
 #define AERO_SSE_BYTES_OFFSET 16
 #define AERO_AVX_BYTES_OFFSET 32
 #define AERO_AVX512_BYTES_OFFSET 64
+
+#pragma region Windows System API Segments
+
+#ifndef UNICODE
+#define UNICODE
+#endif /* UNICODE */
+
+#if defined(_WIN32) || defined(_WIN64)
 
 #include <windows.h>
 #include <winnt.h>
@@ -204,4 +206,38 @@ namespace Aero_System {
 #pragma endregion
 
 #endif /* defined(_WIN32) || defined(_WIN64) */
+#pragma endregion Windows System API Segments
+
+#pragma region Linux API Segments
+#ifdef __linux__
+
+#include <fcntl.h>
+
+namespace Aero_System {
+	// Console Definition
+	namespace Console {
+
+	}
+
+	// File Definition
+	namespace File {
+		int Create(const char *filename, mode_t mode);
+	}
+
+	// Inform Definition
+	namespace Inform {
+
+	}
+}
+
+#endif /* __linux__ */
+#pragma endregion Linux System API Segments
+
+#pragma region FreeBSD System API Segments
+#ifdef __FreeBSD__
+
+
+#endif /* __FreeBSD__ */
+#pragma endregion FreeBSD System API Segments
+
 #endif /* AERO_SYSTEM_HH */

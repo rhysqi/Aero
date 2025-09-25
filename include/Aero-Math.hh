@@ -1,6 +1,8 @@
 #ifndef AERO_MATH_HH
 #define AERO_MATH_HH
 
+#pragma region Windows System API Segments
+
 #ifndef UNICODE
 #define UNICODE
 #endif /* UNICODE */
@@ -106,4 +108,16 @@ namespace Aero_Math {
 }
 
 #endif /* defined(_WIN32) || defined(_WIN64) */
+#pragma endregion Windows System API Segments
+
+#ifdef __linux__
+
+
+#endif /* __linux__ */
+
+#ifdef __FreeBSD__
+
+
+#endif /* __FreeBSD__ */
+
 #endif /* AERO_MATH_HH */

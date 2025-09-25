@@ -1,10 +1,10 @@
-#ifndef UNICODE
-#define UNICODE
-#endif /* UNICODE */
+#include "../../include/Aero-System.hh"
 
 #if defined(_WIN32) || defined(_WIN64)
 
-#include "../../include/Aero-System.hh"
+#ifndef UNICODE
+#define UNICODE
+#endif /* UNICODE */
 
 #include <winnt.h>
 
