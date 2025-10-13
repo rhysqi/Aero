@@ -1,34 +1,21 @@
-#include <Windows.h>
-#include <synchapi.h>
-#include <winnt.h>
 
-#include <Pdh.h>
+#include <stdio.h>
 
-#include <profileapi.h>
-#include <errhandlingapi.h>
+#include <X11/Xlib.h>
+#include <X11/X.h>
 
-#include <wchar.h>
+#include <sys/types.h>
+#include <unistd.h>
 
-void PerformCounter()
-{
-    LARGE_INTEGER pfc;
-    QueryPerformanceFrequency(&pfc);
+int main(int argc, const char *argv[]){
 
-    LARGE_INTEGER frequency;
-    QueryPerformanceFrequency(&frequency);
+    Display* display = XOpenDisplay(NULL);
+    int scr = DefaultScreen(display);
 
-    int divisor = 1000000000;
+    printf(
+        "Screen Height: %d\n", DisplayWidth(display, scr)
+    );
     
-    double Seconds = ((double)pfc.QuadPart / frequency.QuadPart) / divisor;
-    wprintf(L"Time in Seconds: %.9f seconds\n", Seconds);
-
-    ULONGLONG NanoSeconds = (pfc.QuadPart * divisor) / frequency.QuadPart;
-    wprintf(L"Time in Nano Seconds: %llu ns\n", NanoSeconds / divisor);
-}
-
-int wmain(int argc, const wchar_t *argv[]){
-    
-    PerformCounter();
     
     return 0;
 }
